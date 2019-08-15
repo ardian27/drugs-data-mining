@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\DataAwal;
 
 class SiteController extends Controller
 {
@@ -121,8 +122,21 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionAbout()
+    public function actionStart()
     {
-        return $this->render('about');
+        return $this->render('start');
+    }
+
+    public function actionDataAwal()
+    {
+        $data =  DataAwal::find()->all();
+        
+
+        return $this->render('..\data-awal\index',
+        [
+            'dataProvider'=>$data,
+
+        ]);
+
     }
 }

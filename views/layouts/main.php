@@ -9,12 +9,15 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\grid\GridView;
+use app\models\DataAwal;
 
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
+
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,11 +26,12 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
-<?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
+<body>
+    <?php $this->beginBody() ?>
+
+    <div class="wrap">
+        <?php
     NavBar::begin([
         'brandLabel' => "Drugs Data Mining",
         'brandUrl' => Yii::$app->homeUrl,
@@ -39,7 +43,14 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'K-Means', 'url' => ['#']],
+            ['label' => 'Data Mining', 'url' => ['/proses']],
+            [
+                'label' => 'K-Means',
+                'items' => [
+                     ['label' => 'Set Cluster', 'url' => 'index.php?r=variable'],
+                     ['label' => 'Clustering', 'url' => 'index.php?r=clusterring'],
+                ],
+            ],
             ['label' => 'About', 'url' => ['/site/contact']],
             
         ],
@@ -47,24 +58,28 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
+<div class="container">
+            
+        </div>
+        <div class="container">
+            <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+            <?= Alert::widget() ?>
+            <?= $content ?>
+        </div>
     </div>
-</div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; TEKNIK INFORMATIKA <?= date('Y') ?></p>
+    <footer class="footer">
+        <div class="container">
+            <p class="pull-left">&copy; TEKNIK INFORMATIKA <?= date('Y') ?></p>
 
-        
-    </div>
-</footer>
 
-<?php $this->endBody() ?>
+        </div>
+    </footer>
+
+    <?php $this->endBody() ?>
 </body>
+
 </html>
 <?php $this->endPage() ?>

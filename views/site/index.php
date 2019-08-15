@@ -18,9 +18,7 @@ $this->title = 'Drugs Mining';
                 <h2>Hijriah Daulay</h2>
                 <h4>11351202604</h4>
                 <h4>Teknik Informatika</h4>
-                <h4>UIN Suska Riau</h4>
-
-                
+                <h4>UIN Suska Riau</h4>                
             </div>
         </div>
 
