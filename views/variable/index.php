@@ -36,7 +36,7 @@ CrudAsset::register($this);
             ],          
             'striped' => true,
             'condensed' => true,
-            'responsive' => true,          
+            'responsive' => false,          
             'panel' => [
                 'type' => 'primary', 
                 'heading' => '<i class="glyphicon glyphicon-list"></i> Data Variable Cluster',
