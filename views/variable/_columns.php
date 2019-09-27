@@ -5,14 +5,10 @@ return [
     // [
     //     'class' => 'kartik\grid\CheckboxColumn',
     //     'width' => '20px',
-    //     'vAlign'=>'center',
-    //     'hAlign'=>'center'
     // ],
     [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
-        'vAlign'=>'center',
-        'hAlign'=>'center'
     ],
         // [
         // 'class'=>'\kartik\grid\DataColumn',
@@ -21,8 +17,12 @@ return [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'cluster',
-        'vAlign'=>'center',
-        'hAlign'=>'center'
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'status',
+        'hAlign'=>'center',
+        'vAlign'=>'middle',
     ],
     [
         'class' => 'kartik\grid\ActionColumn',

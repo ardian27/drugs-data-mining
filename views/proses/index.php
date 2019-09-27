@@ -20,7 +20,7 @@ $query = DataAwal::find();
 $dataawal = new ActiveDataProvider([
 'query' => $query,
 'pagination' => [
-    'pageSize' => 100,
+    'pageSize' => 50,
 ],
 
 ]);
@@ -36,7 +36,7 @@ $query = DataPreprosessing::find();
 $datapreprosessing = new ActiveDataProvider([
 'query' => $query,
 'pagination' => [
-    'pageSize' => 100,
+    'pageSize' => 50,
 ],
 
 ]);
@@ -52,7 +52,7 @@ $query = DataSeleksi::find();
 $dataseleksi = new ActiveDataProvider([
 'query' => $query,
 'pagination' => [
-    'pageSize' => 100,
+    'pageSize' => 50,
 ],
 
 ]);
@@ -68,7 +68,7 @@ $query = DataTransformasi::find();
 $datatransformasi = new ActiveDataProvider([
 'query' => $query,
 'pagination' => [
-    'pageSize' => 100,
+    'pageSize' => 50,
 ],
 
 ]);

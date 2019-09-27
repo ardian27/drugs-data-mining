@@ -22,6 +22,9 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="chart.css">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/theus/chart.css/v1.0.0/dist/chart.css" />
+    <link rel="text/javascript" href="https://cdnjs.com/libraries/Chart.js" />
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -43,11 +46,11 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Data Mining', 'url' => ['/proses']],
+            ['label' => 'KDD', 'url' => ['/proses']],
             [
                 'label' => 'K-Means',
                 'items' => [
-                     ['label' => 'Set Cluster', 'url' => 'index.php?r=variable'],
+                     ['label' => 'Set Nilai K', 'url' => 'index.php?r=variable'],
                      ['label' => 'Clustering', 'url' => 'index.php?r=clusterring'],
                 ],
             ],

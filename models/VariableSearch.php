@@ -19,6 +19,7 @@ class VariableSearch extends Variable
     {
         return [
             [['id', 'cluster'], 'integer'],
+            [['status'], 'safe'],
         ];
     }
 
@@ -58,6 +59,8 @@ class VariableSearch extends Variable
             'id' => $this->id,
             'cluster' => $this->cluster,
         ]);
+
+        $query->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;
     }
