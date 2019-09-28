@@ -45,8 +45,6 @@ $DataPreprosessing = $this->render('//data-preprosessing/index', [
     'dataProvider' => $datapreprosessing,
 ]);
 
-
-
 // Data Selection
 $query = DataSeleksi::find();               
 $dataseleksi = new ActiveDataProvider([
@@ -54,7 +52,6 @@ $dataseleksi = new ActiveDataProvider([
 'pagination' => [
     'pageSize' => 50,
 ],
-
 ]);
 
 $DataSeleksi = $this->render('//data-seleksi/index', [
@@ -87,7 +84,7 @@ $wizard_config = [
             'icon' => 'glyphicon glyphicon-cloud-download',
             'buttons' => [
                 'next' => [
-                    'title' => 'Preprosessing', 
+                    'title' => 'Proses Data Seleksi', 
                     'options' => [
                         // 'class' => 'disabled'
                     ],
@@ -97,12 +94,12 @@ $wizard_config = [
 
         ],
         3 => [
-            'title' => 'Data Preprosessing',
+            'title' => 'Data Seleksi',
             'icon' => 'glyphicon glyphicon-cloud-download',
-            'content' => ''.$DataPreprosessing,
+            'content' => ''.$DataSeleksi,
             'buttons' => [
                 'next' => [
-                    'title' => 'Proses Data Seleksi', 
+                    'title' => 'Proses Data Preprosessing', 
                     'options' => [
                         //'class' => 'disabled'
                     ],
@@ -112,9 +109,9 @@ $wizard_config = [
         ],
         
         4 => [
-            'title' => 'Data Seleksi',
+            'title' => 'Data Preprosessing',
             'icon' => 'glyphicon glyphicon-cloud-download',
-            'content' => ''.$DataSeleksi,
+            'content' => ''.$DataPreprosessing,
             'buttons' => [
                 'next' => [
                     'title' => 'Proses Data Transformasi', 

@@ -12,6 +12,8 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'cluster')->textInput() ?>
+	<?= $form->field($model, 'status')->dropDownList([  'Active' => 'Active', 'Not Active' => 'Not Active' ]) ?>
+
 
   
 	<?php if (!Yii::$app->request->isAjax){ ?>

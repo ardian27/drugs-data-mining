@@ -302,6 +302,8 @@ $cluster = $k['cluster'];
                 </tr>
                 <?php
 
+                echo sizeOf($clustered_data);
+
                 foreach ($clustered_data as $cd) {
 
                     ?>
@@ -325,11 +327,11 @@ $cluster = $k['cluster'];
         <BR>
         <BR>
         <div class="row">
-            <?= print("<pre>" . "" . print_r($clustered_data, true) . "</pre>"); ?>
+            <!-- <?= print("<pre>" . "" . print_r($clustered_data, true) . "</pre>"); ?> -->
         </div>
 
         <div class="row">
-            <?= print("<pre>" . "" . print_r($centroids, true) . "</pre>"); ?>
+            <!-- <?= print("<pre>" . "" . print_r($kmeans->getHasil(), true) . "</pre>"); ?> -->
         </div>
         <?php
 
@@ -378,16 +380,6 @@ $cluster = $k['cluster'];
         //     ],
         // ]); 
 
-        function countClusterData($datacentroid, $jumlahcluster)
-        {
-            // $count = array();
-
-            $a = 0;
-            foreach ($jumlahcluster as $j) {
-                // $count = ?
-            }
-            return null;
-        }
 
 
         function eucDistance(array $a, array $b)
@@ -448,54 +440,11 @@ $cluster = $k['cluster'];
         // echo print_r($dataCentroid);
 
 
-        function setDataCentroid($cluster)
-        {
-
-            $dataAwal = DataTransformasi::find()
-                ->select('umur', 'jenis_kelamin', 'ras', 'jenis_obat_1', 'jenis_obat_2', 'jenis_obat_3', 'jenis_obat_4', 'jenis_obat_5', 'jenis_obat_6', 'jenis_obat_7')
-                ->asArray()
-                // ->limit($cluster)
-                ->all();
-            return $dataAwal;
-        }
-
-
-
-
-        function euclid($cluster)
-        {
-
-            // $akar 
-
-            return null;
-        }
-
-        function printArray($array)
-        {
-            foreach ($array as $item) {
-                echo $item['umur'];
-            }
-            return null;
-        }
-
-
-        function array_values_recursive($array)
-        {
-            $array = array_values($array);
-            for ($i = 0, $n = count($array); $i < $n; $i++) {
-                $element = $array[$i];
-                if (is_array($element)) {
-                    $array[$i] = array_values_recursive($element);
-                }
-            }
-            return $array;
-        }
-
-
         class KMeans
         {
             // initial, unmodified data field
             protected $data;
+            protected $hasil;
             // array of modified data, multi-dimensional based on cluster_count
             protected $clustered_data;
             // array of centroids based on cluster_count
@@ -543,6 +492,10 @@ $cluster = $k['cluster'];
                         $closest_centroid = $this->calculateClosestCentroid($observation, $centroids);
                         array_push($new_clustered_data[$closest_centroid], $observation);
                     }
+                    // print("<pre>" . "" . sizeof($new_clustered_data) . "</pre>");
+                    // print("<pre>" . "" . print_r($new_clustered_data, true) . "</pre>");
+                    // setHasil($new_clustered_data);
+                    $this->hasil = $new_clustered_data;
                 } while ($this->assignmentConvergenceCheck((array) $this->clustered_data, $new_clustered_data) === false);
                 $this->centroids = $centroids;
                 // todo calculate centroid distances
@@ -569,29 +522,7 @@ $cluster = $k['cluster'];
                 }
                 return $this->clustered_data;
             }
-            /**
-             * simple getter to fetch centroid distance
-             * this number is helpful for determining cluster count for repeat runs
-             * will throw an exception if cluster has not been run yet
-             *
-             * @return  array  list of centroid distances
-             */
-            /*
-    public function getCentroidDistance()
-    {
-        if (empty($this->centroid_distance)) {
-            throw new Exception('Centroid distance has not been hydrated yet - run cluster method first');
-        }
-        return $this->centroid_distance;
-    }
-*/
-            /**
-             * contained switch for initialization method
-             *
-             * @param   $cluster_count  integer  how manu clusters are requested
-             * @param   $method         string   type of initialization requested
-             * @return                  array    list of centroids for initialization
-             */
+
             protected function getInitialCentroids($cluster_count, $method)
             {
                 if ($method == 'forgy') {
@@ -601,26 +532,12 @@ $cluster = $k['cluster'];
                     return $this->getRandomInitialization($cluster_count);
                 }
             }
-            /**
-             * get initialization points from random selection
-             * try to lean towards center of data set
-             *
-             * @param   $cluster_count  integer  number of points to fetch
-             * @return                  array    list of initialization points
-             */
             protected function getRandomInitialization($cluster_count)
             {
                 $random_keys = array_rand($this->data, $cluster_count);
                 $random_keys = array_flip($random_keys);
                 return array_intersect_key($this->data, $random_keys);
             }
-            /**
-             * get initialization points from random points in data set
-             * tends to spread out points more
-             *
-             * @param   $cluster_count  integer  number of points to fetch
-             * @return                  array    list of initialization points
-             */
             protected function getForgyInitialization($cluster_count)
             {
                 $data_range = $this->calculateRange($this->data);
@@ -633,12 +550,6 @@ $cluster = $k['cluster'];
                 }
                 return $random_points;
             }
-            /**
-             * calculate centroids based on clustered data
-             *
-             * @param   $clustered_data  array  multi-dimensional array of clustered data
-             * @return                   array  list of centroids
-             */
             protected function calculateCentroids(array $clustered_data)
             {
                 $centroids = [];
@@ -721,6 +632,7 @@ $cluster = $k['cluster'];
                         $key++;
                     }
                 }
+
                 return $data_range;
             }
             /**
@@ -740,7 +652,62 @@ $cluster = $k['cluster'];
                 }
                 return $distance;
             }
+            public function setHasil($datahasil)
+            {
+
+                return $this->hasil = $datahasil;
+            }
+
+            public function getHasil()
+            {
+
+                return $this->hasil;
+            }
         }
+
+        function setDataCentroid($cluster)
+        {
+
+            $dataAwal = DataTransformasi::find()
+                ->select('umur', 'jenis_kelamin', 'ras', 'jenis_obat_1', 'jenis_obat_2', 'jenis_obat_3', 'jenis_obat_4', 'jenis_obat_5', 'jenis_obat_6', 'jenis_obat_7')
+                ->asArray()
+                // ->limit($cluster)
+                ->all();
+            return $dataAwal;
+        }
+
+
+
+
+        function euclid($cluster)
+        {
+
+            // $akar 
+
+            return null;
+        }
+
+        function printArray($array)
+        {
+            foreach ($array as $item) {
+                echo $item['umur'];
+            }
+            return null;
+        }
+
+
+        function array_values_recursive($array)
+        {
+            $array = array_values($array);
+            for ($i = 0, $n = count($array); $i < $n; $i++) {
+                $element = $array[$i];
+                if (is_array($element)) {
+                    $array[$i] = array_values_recursive($element);
+                }
+            }
+            return $array;
+        }
+
 
 
         ?>
