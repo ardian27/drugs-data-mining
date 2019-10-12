@@ -9,9 +9,11 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 
 // 1. TENTUKAN JUMLAH CLUSTER
+// $k = Variable::findOne(['status' => 'Active']);
 $k = Variable::findOne(['status' => 'Active']);
 
-$cluster = $k['cluster'];
+$cluster = 10;
+// $cluster = $k['cluster'];
 
 ?>
 <h1>clusterring/index</h1>
@@ -26,7 +28,6 @@ $cluster = $k['cluster'];
 <div>
 
     <?php
-
 
     // HITUNG JARAK ANTARA CENTROID DENGAN EUCLID
 
@@ -58,6 +59,7 @@ $cluster = $k['cluster'];
 
 
     // DATA TRANSFORMATION
+    // $id = DataTransformasi::find()->select('id_data')->asArray()->all();
     $umur = DataTransformasi::find()->select('umur')->asArray()->all();
     $jk = DataTransformasi::find()->select('jenis_kelamin')->asArray()->all();
     $ras = DataTransformasi::find()->select('ras')->asArray()->all();
@@ -70,6 +72,7 @@ $cluster = $k['cluster'];
     $j7 = DataTransformasi::find()->select('jenis_obat_7')->asArray()->all();
 
 
+    // $t_id = convertNumArray($id, 'id_data');
     $t_umur = convertNumArray($umur, 'umur');
     $t_jk = convertNumArray($jk, 'jenis_kelamin');
     $t_ras = convertNumArray($ras, 'ras');
@@ -82,12 +85,17 @@ $cluster = $k['cluster'];
     $t_j7 = convertNumArray($j7, 'jenis_obat_7');
 
     $array = $c_umur;
-
+    $kode = DataTransformasi::find()
+        ->select('id_data,umur,jenis_kelamin,ras,jenis_obat_1,jenis_obat_2,jenis_obat_3,jenis_obat_4,jenis_obat_5,jenis_obat_6,jenis_obat_7')
+        ->select('id_data')
+        ->asArray()
+        ->all();
 
     $alldata = array();
     $a = 0;
     foreach ($t_umur as $data) {
         $alldata[$a] = [
+            // $t_id[$a],
             $t_umur[$a],
             $t_jk[$a],
             $t_ras[$a],
@@ -289,6 +297,7 @@ $cluster = $k['cluster'];
         <table style="width: 100%; text-align: center;" border="1">
             <tbody>
                 <tr>
+                    <td>ID Data</td>
                     <td>X1</td>
                     <td>X2</td>
                     <td>X3</td>
@@ -304,35 +313,45 @@ $cluster = $k['cluster'];
 
                 echo sizeOf($clustered_data);
 
-                foreach ($clustered_data as $cd) {
+                foreach ($clustered_data as $key => $cd) {
 
                     ?>
                     <tr>
-                        <td><?php print_r($cd['0']); ?></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
+                        <td><?php 
+                        // echo $cd[$key][0]
+                         ?></td>
                     </tr>
                 <?php
                 }
                 ?>
             </tbody>
         </table>
-        <BR>
-        <BR>
-        <div class="row">
-            <!-- <?= print("<pre>" . "" . print_r($clustered_data, true) . "</pre>"); ?> -->
-        </div>
+        <?php
+        $nilai = DataTransformasi::find()
+            ->select('id_data,umur,jenis_kelamin,ras,jenis_obat_1,jenis_obat_2,jenis_obat_3,jenis_obat_4,jenis_obat_5,jenis_obat_6,jenis_obat_7')
+            ->asArray()
+            ->all();
 
-        <div class="row">
-            <!-- <?= print("<pre>" . "" . print_r($kmeans->getHasil(), true) . "</pre>"); ?> -->
-        </div>
+        $result = array();
+        $resultss = array();
+        $a = 0;
+        print("<pre> " . print_r($clustered_data, true) . "</pre>");
+
+
+        // foreach ($nilai as $element) {
+        //     $result[$element['id_data']][] = $element['umur'];
+        // }
+
+        // $resultss = array_values($result);
+
+        foreach ($alldata as $value) {
+            // print("<pre>Partisi Awal " . $value. "</pre> ");
+            // print("<pre> " . print_r($value, true) . "</pre>");
+        }
+
+        ?>
+        <BR>
+        <BR>
         <?php
 
         $x1 = array();
@@ -349,7 +368,7 @@ $cluster = $k['cluster'];
         $b = 0;
 
         foreach ($clustered_data as $cs) {
-            // echo "".$cs[$a][$b];
+            echo "" . $cs[$a][$b];
             ?>
             <br>
         <?php
