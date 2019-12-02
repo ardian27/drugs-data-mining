@@ -1,5 +1,6 @@
 <?php
 
+use app\models\ClusterDetail;
 use app\models\DataTransformasi;
 use app\models\Variable;
 use dosamigos\chartjs\ChartJs;
@@ -10,9 +11,10 @@ use yii\grid\GridView;
 
 // 1. TENTUKAN JUMLAH CLUSTER
 // $k = Variable::findOne(['status' => 'Active']);
-$k = Variable::findOne(['status' => 'Active']);
+// $k = Variable::findOne(['status' => 'Active']);
 
-$cluster = sizeOf($clustered_data);
+// $cluster = ClusterDetail::find->max([]);
+
 // $cluster = $k['cluster'];
 
 ?>

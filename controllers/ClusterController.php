@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Cluster;
+use app\models\ClusterDetail;
 use app\models\ClusterSearch;
 use app\models\DataTransformasi;
 use yii\web\Controller;
@@ -73,7 +74,25 @@ class ClusterController extends Controller
             ]);
         }
     }
-    
+
+    public function actionProses()
+    {
+        // $model = new Cluster();
+
+        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        //     return $this->redirect(['view', 'id' => $model->id_cluster]);
+        // }
+
+        
+
+        return $this->render(
+            'proses',
+            // [
+            //     'model' => $model,
+            // ]
+        );
+    }
+
 
     /**
      * Creates a new Cluster model.
@@ -113,91 +132,132 @@ class ClusterController extends Controller
             }
         } else {
 
-            
+
 
             if ($model->load($request->post()) && $model->save()) {
                 $cluster = $model->jumlah_cluster;
-            $dataAwalUmur = DataTransformasi::find()->select('umur')->asArray()->limit($cluster)->all();
-            $dataAwalJk = DataTransformasi::find()->select('jenis_kelamin')->asArray()->limit($cluster)->all();
-            $dataAwalRas = DataTransformasi::find()->select('ras')->asArray()->limit($cluster)->all();
-            $dataAwalJ1 = DataTransformasi::find()->select('jenis_obat_1')->asArray()->limit($cluster)->all();
-            $dataAwalJ2 = DataTransformasi::find()->select('jenis_obat_2')->asArray()->limit($cluster)->all();
-            $dataAwalJ3 = DataTransformasi::find()->select('jenis_obat_3')->asArray()->limit($cluster)->all();
-            $dataAwalJ4 = DataTransformasi::find()->select('jenis_obat_4')->asArray()->limit($cluster)->all();
-            $dataAwalJ5 = DataTransformasi::find()->select('jenis_obat_5')->asArray()->limit($cluster)->all();
-            $dataAwalJ6 = DataTransformasi::find()->select('jenis_obat_6')->asArray()->limit($cluster)->all();
-            $dataAwalJ7 = DataTransformasi::find()->select('jenis_obat_7')->asArray()->limit($cluster)->all();
-            $dataAll = DataTransformasi::find()->asArray()->limit($cluster)->all();
+                $dataAwalUmur = DataTransformasi::find()->select('umur')->asArray()->limit($cluster)->all();
+                $dataAwalJk = DataTransformasi::find()->select('jenis_kelamin')->asArray()->limit($cluster)->all();
+                $dataAwalRas = DataTransformasi::find()->select('ras')->asArray()->limit($cluster)->all();
+                $dataAwalJ1 = DataTransformasi::find()->select('jenis_obat_1')->asArray()->limit($cluster)->all();
+                $dataAwalJ2 = DataTransformasi::find()->select('jenis_obat_2')->asArray()->limit($cluster)->all();
+                $dataAwalJ3 = DataTransformasi::find()->select('jenis_obat_3')->asArray()->limit($cluster)->all();
+                $dataAwalJ4 = DataTransformasi::find()->select('jenis_obat_4')->asArray()->limit($cluster)->all();
+                $dataAwalJ5 = DataTransformasi::find()->select('jenis_obat_5')->asArray()->limit($cluster)->all();
+                $dataAwalJ6 = DataTransformasi::find()->select('jenis_obat_6')->asArray()->limit($cluster)->all();
+                $dataAwalJ7 = DataTransformasi::find()->select('jenis_obat_7')->asArray()->limit($cluster)->all();
+                $dataAll = DataTransformasi::find()->asArray()->limit($cluster)->all();
 
-            $c_umur = toarray($dataAwalUmur, 'umur');
-            $c_jk = toarray($dataAwalJk, 'jenis_kelamin');
-            $c_ras = toarray($dataAwalRas, 'ras');
-            $c_j1 = toarray($dataAwalJ1, 'jenis_obat_1');
-            $c_j2 = toarray($dataAwalJ2, 'jenis_obat_2');
-            $c_j3 = toarray($dataAwalJ3, 'jenis_obat_3');
-            $c_j4 = toarray($dataAwalJ4, 'jenis_obat_4');
-            $c_j5 = toarray($dataAwalJ5, 'jenis_obat_5');
-            $c_j6 = toarray($dataAwalJ6, 'jenis_obat_6');
-            $c_j7 = toarray($dataAwalJ7, 'jenis_obat_7');
-            $c_dataAll = array_values($dataAll);
-
-
-
-            // DATA TRANSFORMATION
-            // $id = DataTransformasi::find()->select('id_data')->asArray()->all();
-            $umur = DataTransformasi::find()->select('umur')->asArray()->all();
-            $jk = DataTransformasi::find()->select('jenis_kelamin')->asArray()->all();
-            $ras = DataTransformasi::find()->select('ras')->asArray()->all();
-            $j1 = DataTransformasi::find()->select('jenis_obat_1')->asArray()->all();
-            $j2 = DataTransformasi::find()->select('jenis_obat_2')->asArray()->all();
-            $j3 = DataTransformasi::find()->select('jenis_obat_3')->asArray()->all();
-            $j4 = DataTransformasi::find()->select('jenis_obat_4')->asArray()->all();
-            $j5 = DataTransformasi::find()->select('jenis_obat_5')->asArray()->all();
-            $j6 = DataTransformasi::find()->select('jenis_obat_6')->asArray()->all();
-            $j7 = DataTransformasi::find()->select('jenis_obat_7')->asArray()->all();
+                $c_umur = toarray($dataAwalUmur, 'umur');
+                $c_jk = toarray($dataAwalJk, 'jenis_kelamin');
+                $c_ras = toarray($dataAwalRas, 'ras');
+                $c_j1 = toarray($dataAwalJ1, 'jenis_obat_1');
+                $c_j2 = toarray($dataAwalJ2, 'jenis_obat_2');
+                $c_j3 = toarray($dataAwalJ3, 'jenis_obat_3');
+                $c_j4 = toarray($dataAwalJ4, 'jenis_obat_4');
+                $c_j5 = toarray($dataAwalJ5, 'jenis_obat_5');
+                $c_j6 = toarray($dataAwalJ6, 'jenis_obat_6');
+                $c_j7 = toarray($dataAwalJ7, 'jenis_obat_7');
+                $c_dataAll = array_values($dataAll);
 
 
-            // $t_id = convertNumArray($id, 'id_data');
-            $t_umur = toarray($umur, 'umur');
-            $t_jk = toarray($jk, 'jenis_kelamin');
-            $t_ras = toarray($ras, 'ras');
-            $t_j1 = toarray($j1, 'jenis_obat_1');
-            $t_j2 = toarray($j2, 'jenis_obat_2');
-            $t_j3 = toarray($j3, 'jenis_obat_3');
-            $t_j4 = toarray($j4, 'jenis_obat_4');
-            $t_j5 = toarray($j5, 'jenis_obat_5');
-            $t_j6 = toarray($j6, 'jenis_obat_6');
-            $t_j7 = toarray($j7, 'jenis_obat_7');
 
-            $array = $c_umur;
-            $kode = DataTransformasi::find()
-                ->select('id_data,umur,jenis_kelamin,ras,jenis_obat_1,jenis_obat_2,jenis_obat_3,jenis_obat_4,jenis_obat_5,jenis_obat_6,jenis_obat_7')
-                ->select('id_data')
-                ->asArray()
-                ->all();
+                // DATA TRANSFORMATION
+                // $id = DataTransformasi::find()->select('id_data')->asArray()->all();
+                $umur = DataTransformasi::find()->select('umur')->asArray()->all();
+                $jk = DataTransformasi::find()->select('jenis_kelamin')->asArray()->all();
+                $ras = DataTransformasi::find()->select('ras')->asArray()->all();
+                $j1 = DataTransformasi::find()->select('jenis_obat_1')->asArray()->all();
+                $j2 = DataTransformasi::find()->select('jenis_obat_2')->asArray()->all();
+                $j3 = DataTransformasi::find()->select('jenis_obat_3')->asArray()->all();
+                $j4 = DataTransformasi::find()->select('jenis_obat_4')->asArray()->all();
+                $j5 = DataTransformasi::find()->select('jenis_obat_5')->asArray()->all();
+                $j6 = DataTransformasi::find()->select('jenis_obat_6')->asArray()->all();
+                $j7 = DataTransformasi::find()->select('jenis_obat_7')->asArray()->all();
 
-            $alldata = array();
-            $a = 0;
-            foreach ($t_umur as $data) {
-                $alldata[$a] = [
-                    // $t_id[$a],
-                    $t_umur[$a],
-                    $t_jk[$a],
-                    $t_ras[$a],
-                    $t_j1[$a],
-                    $t_j2[$a],
-                    $t_j3[$a],
-                    $t_j4[$a],
-                    $t_j5[$a],
-                    $t_j6[$a],
-                    $t_j7[$a]
-                ];
-                $a++;
-            }
-            $kmeans = new Kmeans($alldata);
-            $kmeans->cluster($cluster); // setting jumlah cluster 
-            $clustered_data = $kmeans->getClusteredData();
-            $centroids = $kmeans->getCentroids();
+
+                // $t_id = convertNumArray($id, 'id_data');
+                $t_umur = toarray($umur, 'umur');
+                $t_jk = toarray($jk, 'jenis_kelamin');
+                $t_ras = toarray($ras, 'ras');
+                $t_j1 = toarray($j1, 'jenis_obat_1');
+                $t_j2 = toarray($j2, 'jenis_obat_2');
+                $t_j3 = toarray($j3, 'jenis_obat_3');
+                $t_j4 = toarray($j4, 'jenis_obat_4');
+                $t_j5 = toarray($j5, 'jenis_obat_5');
+                $t_j6 = toarray($j6, 'jenis_obat_6');
+                $t_j7 = toarray($j7, 'jenis_obat_7');
+
+                $array = $c_umur;
+                $kode = DataTransformasi::find()
+                    ->select('id_data,umur,jenis_kelamin,ras,jenis_obat_1,jenis_obat_2,jenis_obat_3,jenis_obat_4,jenis_obat_5,jenis_obat_6,jenis_obat_7')
+                    ->select('id_data')
+                    ->asArray()
+                    ->all();
+
+                $alldata = array();
+                $a = 0;
+                foreach ($t_umur as $data) {
+                    $alldata[$a] = [
+                        // $t_id[$a],
+                        $t_umur[$a],
+                        $t_jk[$a],
+                        $t_ras[$a],
+                        $t_j1[$a],
+                        $t_j2[$a],
+                        $t_j3[$a],
+                        $t_j4[$a],
+                        $t_j5[$a],
+                        $t_j6[$a],
+                        $t_j7[$a]
+                    ];
+                    $a++;
+                }
+                $kmeans = new Kmeans($alldata);
+                $kmeans->cluster($cluster); // setting jumlah cluster 
+                $clustered_data = $kmeans->getClusteredData();
+                $centroids = $kmeans->getCentroids();
+
+                $id_cluster = Cluster::find()->max('id_cluster');
+
+                $datainsert = array();
+                foreach ($clustered_data as $key => $value) {
+                    $x = $key;
+
+                    $length = count($clustered_data[0][0]);
+                    foreach ($value as $key => $data) {
+                        // for ($i = 0; $i < $length; $i++) {
+
+                        $datainsert[] = [
+                            'id_cluster' => $id_cluster,
+                            'id_data' => $x + 1,
+                            'x1' => $data[0],
+                            'x2' => $data[1],
+                            'x3' => $data[2],
+                            'x4' => $data[3],
+                            'x5' => $data[4],
+                            'x6' => $data[5],
+                            'x7' => $data[6],
+                            'x8' => $data[7],
+                            'x9' => $data[8],
+                            'x10' => $data[9],
+
+                        ];
+                    }
+                    // }
+                }
+                if (count($datainsert) > 0) {
+                    $columnNameArray = ['id_cluster', 'id_data', 'x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'x8', 'x9', 'x10'];
+                    // below line insert all your record and return number of rows inserted
+                    $insertCount = Yii::$app->db->createCommand()
+                        ->batchInsert(
+                            'cluster_detail',
+                            $columnNameArray,
+                            $datainsert
+                        )
+                        ->execute();
+                }
+
                 return $this->render('dream', ['clustered_data' => $clustered_data]);
             } else {
                 return $this->render('create', [
@@ -206,7 +266,16 @@ class ClusterController extends Controller
             }
         }
     }
- 
+
+    public function actionDetail($id)
+    {
+        $data = ClusterDetail::findAll(['id_cluster' => $id]);
+
+
+        return $this->render('dream', ['clustered_data' => $data]);
+    }
+
+
 
     /**
      * Updates an existing Cluster model.

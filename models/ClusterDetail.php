@@ -38,7 +38,7 @@ class ClusterDetail extends \yii\db\ActiveRecord
     {
         return [
             [['id_cluster', 'id_data'], 'integer'],
-            [['x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'x8', 'x9', '10'], 'number'],
+            [['x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'x8', 'x9', 'x10'], 'number'],
         ];
     }
 
@@ -49,8 +49,8 @@ class ClusterDetail extends \yii\db\ActiveRecord
     {
         return [
             'id_cluster_detail' => 'Id Cluster Detail',
-            'id_cluster' => 'Id Cluster',
-            'id_data' => 'Id Data',
+            'id_cluster' => 'ID Cluster',
+            'id_data' => 'Anggota Cluster',
             'x1' => 'X1',
             'x2' => 'X2',
             'x3' => 'X3',
@@ -60,7 +60,7 @@ class ClusterDetail extends \yii\db\ActiveRecord
             'x7' => 'X7',
             'x8' => 'X8',
             'x9' => 'X9',
-            '10' => '10',
+            'x10' => 'X10',
         ];
     }
 }
