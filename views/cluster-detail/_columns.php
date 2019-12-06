@@ -3,6 +3,13 @@
 use yii\helpers\Url;
 
 return [
+    
+    [
+        'class' => 'kartik\grid\SerialColumn',
+        'width' => '30px',
+        'hAlign' => 'center',
+        'vAlign' => 'middle',
+    ],
     [
         'class' => '\kartik\grid\DataColumn',
         'attribute' => 'id_cluster',

@@ -46,15 +46,20 @@ class ClusterDetailController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-    public function actionDetail($id)
+    public function actionDetail($id,$cluster)
     {    
         $searchModel = new ClusterDetailSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider ->query->where(['id_cluster' => $id]);
 
+        $data= ClusterDetail::find(['id_cluster'=>$id])->asArray()->all();
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'data'=>$data,
+            'cluster'=>$cluster,
+            'id'=>$id,
         ]);
     }
 

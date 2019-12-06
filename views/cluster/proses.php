@@ -18,8 +18,8 @@ $data = array(
     array(0.5,  1, 0,                   0.234,  0.5,                0.34,  0, 0, 0, 0),
 );
 
-$dataDB = DataTransformasi::find()->select('umur,jenis_kelamin,ras,jenis_obat_1,jenis_obat_2,jenis_obat_3,jenis_obat_4,jenis_obat_5,jenis_obat_6,jenis_obat_7',)->asArray()->limit(100)->all();
-// $dataDB = DataTransformasi::find()->select('umur,jenis_kelamin,ras,jenis_obat_1,jenis_obat_2,jenis_obat_3,jenis_obat_4,jenis_obat_5,jenis_obat_6,jenis_obat_7')->asArray()->all();
+// $dataDB = DataTransformasi::find()->select('umur,jenis_kelamin,ras,jenis_obat_1,jenis_obat_2,jenis_obat_3,jenis_obat_4,jenis_obat_5,jenis_obat_6,jenis_obat_7',)->asArray()->limit(100)->all();
+$dataDB = DataTransformasi::find()->select('umur,jenis_kelamin,ras,jenis_obat_1,jenis_obat_2,jenis_obat_3,jenis_obat_4,jenis_obat_5,jenis_obat_6,jenis_obat_7')->asArray()->all();
 $result = array_map('array_values', $dataDB);
 $T_result = transpose($result);
 
@@ -174,10 +174,13 @@ function start($cluster, $data)
                     )
                     ->execute();
             }
-            $this->redirect(['user/index']);
+           
             break;
         }
     }
+    // return $this->redirect(['cluster-detail/index']);
+    // return $this->redirect(['cluster/index']);
+    return Yii::$app->response->redirect(['cluster-detail/detail','id'=>$id_cluster,'cluster'=>$cluster]);
 }
 
 
