@@ -15,25 +15,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id_data')->textInput() ?>
 
-    <?= $form->field($model, 'x1')->textInput() ?>
-
-    <?= $form->field($model, 'x2')->textInput() ?>
-
-    <?= $form->field($model, 'x3')->textInput() ?>
-
-    <?= $form->field($model, 'x4')->textInput() ?>
-
-    <?= $form->field($model, 'x5')->textInput() ?>
-
-    <?= $form->field($model, 'x6')->textInput() ?>
-
-    <?= $form->field($model, 'x7')->textInput() ?>
-
-    <?= $form->field($model, 'x8')->textInput() ?>
-
-    <?= $form->field($model, 'x9')->textInput() ?>
-
-    <?= $form->field($model, 'x10')->textInput() ?>
+    <?= $form->field($model, 'anggota_cluster')->textInput() ?>
 
   
 	<?php if (!Yii::$app->request->isAjax){ ?>

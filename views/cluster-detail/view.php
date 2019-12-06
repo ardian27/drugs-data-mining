@@ -13,16 +13,7 @@ use yii\widgets\DetailView;
             'id_cluster_detail',
             'id_cluster',
             'id_data',
-            'x1',
-            'x2',
-            'x3',
-            'x4',
-            'x5',
-            'x6',
-            'x7',
-            'x8',
-            'x9',
-            'x10',
+            'anggota_cluster',
         ],
     ]) ?>
 

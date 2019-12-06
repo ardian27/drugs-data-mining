@@ -46,8 +46,6 @@ class ClusterDetailController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-
-
     public function actionDetail($id)
     {    
         $searchModel = new ClusterDetailSearch();
@@ -59,6 +57,7 @@ class ClusterDetailController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
 
     /**
      * Displays a single ClusterDetail model.

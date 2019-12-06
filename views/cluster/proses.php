@@ -1,8 +1,7 @@
-<pre>
-TES
-</pre>
+ 
 <?php
 
+use app\models\Cluster;
 use app\models\DataTransformasi;
 
 
@@ -19,26 +18,26 @@ $data = array(
     array(0.5,  1, 0,                   0.234,  0.5,                0.34,  0, 0, 0, 0),
 );
 
-// $dataDB = DataTransformasi::find()->select('umur,jenis_kelamin,ras,jenis_obat_1,jenis_obat_2,jenis_obat_3,jenis_obat_4,jenis_obat_5,jenis_obat_6,jenis_obat_7',)->asArray()->limit(10)->all();
-$dataDB = DataTransformasi::find()->select('umur,jenis_kelamin,ras,jenis_obat_1,jenis_obat_2,jenis_obat_3,jenis_obat_4,jenis_obat_5,jenis_obat_6,jenis_obat_7')->asArray()->all();
+$dataDB = DataTransformasi::find()->select('umur,jenis_kelamin,ras,jenis_obat_1,jenis_obat_2,jenis_obat_3,jenis_obat_4,jenis_obat_5,jenis_obat_6,jenis_obat_7',)->asArray()->limit(100)->all();
+// $dataDB = DataTransformasi::find()->select('umur,jenis_kelamin,ras,jenis_obat_1,jenis_obat_2,jenis_obat_3,jenis_obat_4,jenis_obat_5,jenis_obat_6,jenis_obat_7')->asArray()->all();
 $result = array_map('array_values', $dataDB);
 $T_result = transpose($result);
 
-$final=array();
-foreach($result as $key=>$rows){ 
-    $i=$key;
-    foreach($rows as $key=>$row){ 
-        $final[$i][$key]= (int) $result[$i][$key];
+$final = array();
+foreach ($result as $key => $rows) {
+    $i = $key;
+    foreach ($rows as $key => $row) {
+        $final[$i][$key] = (int) $result[$i][$key];
     }
-} 
+}
+$cluster = Cluster::find()->select('jumlah_cluster')->orderBy(['id_cluster' => SORT_DESC])->one();
 
 
-$jumlah_cluster = 9;
+$jumlah_cluster = $cluster['jumlah_cluster'];
 
-print("<p><pre><h4>Matrix  Data <h4> </pre> ");
-print("<p>Data Dummy <pre> " . print_r($data, true) . "</pre> "); 
-print("<p>Data DB <pre> " . print_r($final, true) . "</pre> ");
-// print("<p><pre> " . print_r(cekNilaiTerkecil($data[0]), true) . "</pre> ");
+// print("<p><pre><h4>Matrix  Data <h4> </pre> ");
+// print("<p>Data Dummy <pre> " . print_r($cluster['jumlah_cluster'], true) . "</pre> "); 
+// print("<p>Data DB <pre> " . print_r($final, true) . "</pre> "); 
 
 (start($jumlah_cluster, $final));
 
@@ -53,62 +52,63 @@ function start($cluster, $data)
     print("<p><pre><h4>Perhitungan 0 <h4> </pre> ");
 
     $data_cluster_0 = setDataCluster($cluster, $data);
-    print("<p>Data Cluster <pre> " . print_r($data_cluster_0, true) . "</pre></p> ");
+    // print("<p>Data Cluster <pre> " . print_r($data_cluster_0, true) . "</pre></p> ");
 
 
     $jarak_data_0 = hitungJarakData($data_cluster_0, $data, $cluster);
-    print("<p>Data Jarak <pre> " . print_r($jarak_data_0, true) . "</pre></p> ");
+    // print("<p>Data Jarak <pre> " . print_r($jarak_data_0, true) . "</pre></p> ");
 
     $hasil_cek_jarak_terpendek_0 = hitungJarakTerpendek($jarak_data_0, $data, $cluster);
-    print("<p>Data hasil cek jarak terpendek <pre> " . print_r($hasil_cek_jarak_terpendek_0, true) . "</pre></p> ");
+    // print("<p>Data hasil cek jarak terpendek <pre> " . print_r($hasil_cek_jarak_terpendek_0, true) . "</pre></p> ");
 
     $hasil_sum_nilai_1_0 = hitungNilaiSumNilai1($hasil_cek_jarak_terpendek_0, $data, $cluster);
-    print("<p>Data hasil sum hasil_cek_jarak_terpendek0 <pre> " . print_r($hasil_sum_nilai_1_0, true) . "</pre></p> ");
+    // print("<p>Data hasil sum hasil_cek_jarak_terpendek0 <pre> " . print_r($hasil_sum_nilai_1_0, true) . "</pre></p> ");
 
     $data_baru_0 = array();
     for ($a = 0; $a < $cluster; $a++) {
         $data_baru_0[$a] = hitungDataClusterBaru($hasil_cek_jarak_terpendek_0, $data, $a);
     }
 
-    print("<p>Data hasil data cluster baru <pre> " . print_r($data_baru_0, true) . "</pre></p> ");
+    // print("<p>Data hasil data cluster baru <pre> " . print_r($data_baru_0, true) . "</pre></p> ");
 
     $hasil_bagi_0 = hitungSumBagiMean($data_baru_0, $hasil_sum_nilai_1_0);
-    print("<p>Data hasil sum bagi   <pre>  " . print_r($hasil_bagi_0, true) . "</pre></p> ");
+    // print("<p>Data hasil sum bagi   <pre>  " . print_r($hasil_bagi_0, true) . "</pre></p> ");
     $data_cluster_baru[0] = $hasil_bagi_0;
 
     //====================
-    print("<p><pre><h4>Perhitungan 1 <h4> </pre> ");
+    // print("<p><pre><h4>Perhitungan 1 <h4> </pre> ");
 
     // $data_cluster_1 = setDataCluster($cluster, $data);
     // print("<p>Data Cluster <pre> " . print_r($data_cluster_1, true) . "</pre></p> ");
 
 
     $jarak_data_1 = hitungJarakData($data_cluster_baru[0], $data, $cluster);
-    print("<p>Data Jarak <pre> " . print_r($jarak_data_1, true) . "</pre></p> ");
+    // print("<p>Data Jarak <pre> " . print_r($jarak_data_1, true) . "</pre></p> ");
 
     $hasil_cek_jarak_terpendek_1 = hitungJarakTerpendek($jarak_data_1, $data, $cluster);
-    print("<p>Data hasil cek jarak terpendek <pre> " . print_r($hasil_cek_jarak_terpendek_1, true) . "</pre></p> ");
+    // print("<p>Data hasil cek jarak terpendek <pre> " . print_r($hasil_cek_jarak_terpendek_1, true) . "</pre></p> ");
 
     $hasil_sum_nilai_1_1 = hitungNilaiSumNilai1($hasil_cek_jarak_terpendek_1, $data, $cluster);
-    print("<p>Data hasil sum hasil_cek_jarak_terpendek0 <pre> " . print_r($hasil_sum_nilai_1_1, true) . "</pre></p> ");
+    // print("<p>Data hasil sum hasil_cek_jarak_terpendek0 <pre> " . print_r($hasil_sum_nilai_1_1, true) . "</pre></p> ");
 
     $data_baru_1 = array();
     for ($a = 0; $a < $cluster; $a++) {
         $data_baru_1[$a] = hitungDataClusterBaru($hasil_cek_jarak_terpendek_1, $data, $a);
     }
 
-    print("<p>Data hasil data cluster baru <pre> " . print_r($data_baru_1, true) . "</pre></p> ");
+    // print("<p>Data hasil data cluster baru <pre> " . print_r($data_baru_1, true) . "</pre></p> ");
 
     $hasil_bagi_1 = hitungSumBagiMean($data_baru_0, $hasil_sum_nilai_1_1);
-    print("<p>Data hasil sum bagi   <pre>  " . print_r($hasil_bagi_0, true) . "</pre></p> ");
+    // print("<p>Data hasil sum bagi   <pre>  " . print_r($hasil_bagi_0, true) . "</pre></p> ");
 
 
     $data_cluster_baru[1] = $hasil_bagi_1;
+    // print("<p>Data cluster  pada iterasi ke " . 1 . "   <pre>  " . print_r($data_cluster_baru[0], true) . "</pre></p> ");
+    // print("<p>Data cluster  pada iterasi ke " . 2 . "   <pre>  " . print_r($data_cluster_baru[1], true) . "</pre></p> ");
 
     // // ($data_cluster_baru[$i - 1] == $data_cluster_baru[$i]) or 
     for ($i = 2; $i < $max_iterasi; $i++) {
 
-        // if (($data_cluster_baru[0] == $data_cluster_baru[1])) {
 
         $jarak_datas[$i] = hitungJarakData($data_cluster_baru[$i - 1], $data, $cluster);
         $hasil_cek_jarak_terpendeks[$i] = hitungJarakTerpendek($jarak_datas[$i], $data, $cluster);
@@ -120,22 +120,63 @@ function start($cluster, $data)
         }
         $hasil_bagis[$i] = hitungSumBagiMean($data_barus[$i], $hasil_sum_nilai_1s[$i]);
         $data_cluster_baru[$i] = $hasil_bagis[$i];
-        print("<p>Data cluster baru iterasi ke" . $i . "   <pre>  " . print_r($data_cluster_baru[$i], true) . "</pre></p> ");
+        // print("<p>Data cluster  pada iterasi ke " . ($i+1) . "   <pre>  " . print_r($data_cluster_baru[$i], true) . "</pre></p> ");
 
 
         if (($data_cluster_baru[$i - 1] == $data_cluster_baru[$i])) {
-            print("<p>Hasil Data Terbaik <pre> " . print_r($hasil_cek_jarak_terpendeks, true) . "</pre> ");
+            // print("<p>Hasil Data Terbaik <pre> " . print_r($hasil_cek_jarak_terpendeks[$i], true) . "</pre> ");
+            $id_cluster = Cluster::find()->max('id_cluster');
 
+
+            // $a = array(
+            //     array(2,2,0),
+            //     array(1,2,3),
+            //     array(2,2,0),
+            // );
+            
+            
+            $anggota_c=array();
+            $hasil=$hasil_cek_jarak_terpendeks[$i];
+            $jumlah_data=sizeof($hasil_cek_jarak_terpendeks[$i]);
+
+            // $jumlah_data=sizeof($a);
+            // echo "panjang".$jumlah_data;
+
+            for($ii=0; $ii< $jumlah_data; $ii++){
+                $anggota_c[$ii]= cekNilaiTerbesar($hasil[$ii])+1;
+                // echo cekNilaiTerbesar($a[$ii]);
+            }
+              
+            // print("<p>Data anggota_c     <pre>  " . print_r($anggota_c, true) . "</pre></p> ");
+                
+            // echo "panjang".sizeof($hasil_cek_jarak_terpendeks[$i])."";
+            
+
+            $datainsert = array();
+         
+
+            foreach ($hasil_cek_jarak_terpendeks[$i] as $key => $value) {
+                $datainsert[] = [
+                    'id_cluster' => $id_cluster,
+                    'id_data' => $key + 1,
+                    'anggota_cluster' => $anggota_c[$key],
+                ];
+            }
+
+            if (count($datainsert) > 0) {
+                $columnNameArray = ['id_cluster', 'id_data', 'anggota_cluster'];
+                // below line insert all your record and return number of rows inserted
+                $insertCount = Yii::$app->db->createCommand()
+                    ->batchInsert(
+                        'cluster_detail',
+                        $columnNameArray,
+                        $datainsert
+                    )
+                    ->execute();
+            }
+            $this->redirect(['user/index']);
             break;
-
-            // return $hasil_cek_jarak_terpendeks[$i];
-
         }
-        // }
-    }
-    for ($i = 2; $i < $max_iterasi; $i++) {
-        // echo "ready";
-
     }
 }
 
@@ -267,6 +308,13 @@ function cekNilaiTerkecil($array)
     return $index;
 }
 
+function cekNilaiTerbesar($array)
+{
+    // $min=min(array_column($array, $row));
+    $index = array_search(max($array), $array);
+    return $index;
+}
+
 // fungsi transpose
 function transpose($array)
 {
@@ -279,6 +327,12 @@ function cariIndexTerkecil($array, $min)
 {
     return array_keys($array,  $min);
 }
+
+function cariIndex($array, $data_target)
+{
+    return array_keys($array,  $data_target);
+}
+
 
 
 
