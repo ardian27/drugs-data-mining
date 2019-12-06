@@ -7,6 +7,7 @@ use app\models\Cluster;
 use app\models\ClusterDetail;
 use app\models\ClusterSearch;
 use app\models\DataTransformasi;
+use Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -77,19 +78,106 @@ class ClusterController extends Controller
 
     public function actionProses()
     {
+        
         // $model = new Cluster();
 
         // if ($model->load(Yii::$app->request->post()) && $model->save()) {
         //     return $this->redirect(['view', 'id' => $model->id_cluster]);
         // }
+        // $cluster = $model->jumlah_cluster;
+        // $dataAwalUmur = DataTransformasi::find()->select('umur')->asArray()->limit($cluster)->all();
+        // $dataAwalJk = DataTransformasi::find()->select('jenis_kelamin')->asArray()->limit($cluster)->all();
+        // $dataAwalRas = DataTransformasi::find()->select('ras')->asArray()->limit($cluster)->all();
+        // $dataAwalJ1 = DataTransformasi::find()->select('jenis_obat_1')->asArray()->limit($cluster)->all();
+        // $dataAwalJ2 = DataTransformasi::find()->select('jenis_obat_2')->asArray()->limit($cluster)->all();
+        // $dataAwalJ3 = DataTransformasi::find()->select('jenis_obat_3')->asArray()->limit($cluster)->all();
+        // $dataAwalJ4 = DataTransformasi::find()->select('jenis_obat_4')->asArray()->limit($cluster)->all();
+        // $dataAwalJ5 = DataTransformasi::find()->select('jenis_obat_5')->asArray()->limit($cluster)->all();
+        // $dataAwalJ6 = DataTransformasi::find()->select('jenis_obat_6')->asArray()->limit($cluster)->all();
+        // $dataAwalJ7 = DataTransformasi::find()->select('jenis_obat_7')->asArray()->limit($cluster)->all();
+        // $dataAll = DataTransformasi::find()->asArray()->limit($cluster)->all();
+
+        // $c_umur = toarray($dataAwalUmur, 'umur');
+        // $c_jk = toarray($dataAwalJk, 'jenis_kelamin');
+        // $c_ras = toarray($dataAwalRas, 'ras');
+        // $c_j1 = toarray($dataAwalJ1, 'jenis_obat_1');
+        // $c_j2 = toarray($dataAwalJ2, 'jenis_obat_2');
+        // $c_j3 = toarray($dataAwalJ3, 'jenis_obat_3');
+        // $c_j4 = toarray($dataAwalJ4, 'jenis_obat_4');
+        // $c_j5 = toarray($dataAwalJ5, 'jenis_obat_5');
+        // $c_j6 = toarray($dataAwalJ6, 'jenis_obat_6');
+        // $c_j7 = toarray($dataAwalJ7, 'jenis_obat_7');
+        // $c_dataAll = array_values($dataAll);
+
+
+        function toarray($array_multi, $v)
+        {
+            $newarray = array();
+            foreach ($array_multi as $key => $value) {
+                $newarray[$key] = $value[$v];
+            }
+            return $newarray;
+        }
+
+        // DATA TRANSFORMATION
+        // $id = DataTransformasi::find()->select('id_data')->asArray()->all();
+        $umur = DataTransformasi::find()->select('umur')->limit(10)->asArray()->all();
+        $jk = DataTransformasi::find()->select('jenis_kelamin')->limit(10)->asArray()->all();
+        $ras = DataTransformasi::find()->select('ras')->limit(10)->asArray()->all();
+        $j1 = DataTransformasi::find()->select('jenis_obat_1')->limit(10)->asArray()->all();
+        $j2 = DataTransformasi::find()->select('jenis_obat_2')->limit(10)->asArray()->all();
+        $j3 = DataTransformasi::find()->select('jenis_obat_3')->limit(10)->asArray()->all();
+        $j4 = DataTransformasi::find()->select('jenis_obat_4')->limit(10)->asArray()->all();
+        $j5 = DataTransformasi::find()->select('jenis_obat_5')->limit(10)->asArray()->all();
+        $j6 = DataTransformasi::find()->select('jenis_obat_6')->limit(10)->asArray()->all();
+        $j7 = DataTransformasi::find()->select('jenis_obat_7')->limit(10)->asArray()->all();
+
+
+        // $t_id = convertNumArray($id, 'id_data');
+        $t_umur = toarray($umur, 'umur');
+        $t_jk = toarray($jk, 'jenis_kelamin');
+        $t_ras = toarray($ras, 'ras');
+        $t_j1 = toarray($j1, 'jenis_obat_1');
+        $t_j2 = toarray($j2, 'jenis_obat_2');
+        $t_j3 = toarray($j3, 'jenis_obat_3');
+        $t_j4 = toarray($j4, 'jenis_obat_4');
+        $t_j5 = toarray($j5, 'jenis_obat_5');
+        $t_j6 = toarray($j6, 'jenis_obat_6');
+        $t_j7 = toarray($j7, 'jenis_obat_7');
+
+        // $array = $c_umur;
+        // $kode = DataTransformasi::find()
+        //     ->select('id_data,umur,jenis_kelamin,ras,jenis_obat_1,jenis_obat_2,jenis_obat_3,jenis_obat_4,jenis_obat_5,jenis_obat_6,jenis_obat_7')
+        //     ->select('id_data')
+        //     ->asArray()
+        //     ->all();
+
+        $alldata = array();
+        $a = 0;
+        foreach ($t_umur as $data) {
+            $alldata[$a] = [
+                // $t_id[$a],
+                $t_umur[$a],
+                $t_jk[$a],
+                $t_ras[$a],
+                $t_j1[$a],
+                $t_j2[$a],
+                $t_j3[$a],
+                $t_j4[$a],
+                $t_j5[$a],
+                $t_j6[$a],
+                $t_j7[$a]
+            ];
+            $a++;
+        }
 
         
 
         return $this->render(
             'proses',
-            // [
-            //     'model' => $model,
-            // ]
+            [
+                'model' => $alldata,
+            ]
         );
     }
 
@@ -102,14 +190,14 @@ class ClusterController extends Controller
      */
     public function actionCreate()
     {
-        function toarray($array_multi, $v)
-        {
-            $newarray = array();
-            foreach ($array_multi as $key => $value) {
-                $newarray[$key] = $value[$v];
-            }
-            return $newarray;
-        }
+        // function toarray($array_multi, $v)
+        // {
+        //     $newarray = array();
+        //     foreach ($array_multi as $key => $value) {
+        //         $newarray[$key] = $value[$v];
+        //     }
+        //     return $newarray;
+        // }
 
         $request = Yii::$app->request;
         $model = new Cluster();

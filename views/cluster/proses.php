@@ -3,29 +3,44 @@ TES
 </pre>
 <?php
 
+use app\models\DataTransformasi;
 
+
+//Data Dummy
 $data = array(
-    // array(0.5,  1, 0,                   0.333333333333333,  0.5,                5,                  1, 2, 3,4),
-
     array(0.5,  1, 0,                   0.333333333333333,  0.5,                0,                  0, 0, 0, 0),
     array(0.5,  1, 0.142857142857143,   0.666666666666667,  0.666666666666667,  0.5,                0, 0, 0, 0),
     array(0.75, 1, 0,                   0.333333333333333,  0,                  0,                  0, 0, 0, 0),
     array(0.5,  1, 0,                   0.666666666666667,  0.5,                0,                  0, 0, 0, 0),
     array(0.5,  1, 0,                   0.666666666666667,  0.5,                0.333333333333333,  0, 0, 0, 0),
     array(0.5,  0, 0,                   0,                  0.333333333333333,  0,                  0, 0, 0, 0),
-    //
+    array(0.5,  1, 0.142857142857143,   0.666666666666667,  0.666666666666667,  0.5,                0, 0, 0, 0),
     array(0.5,  1, 0,                   0.534,  0.5,                0,                  0, 0, 0, 0),
     array(0.5,  1, 0,                   0.234,  0.5,                0.34,  0, 0, 0, 0),
-    // array(0.5,  0, 0,                   0,                  0.333333333333333,  0,                  0, 0, 0, 0),
 );
 
-$jumlah_cluster = 5;
+// $dataDB = DataTransformasi::find()->select('umur,jenis_kelamin,ras,jenis_obat_1,jenis_obat_2,jenis_obat_3,jenis_obat_4,jenis_obat_5,jenis_obat_6,jenis_obat_7',)->asArray()->limit(10)->all();
+$dataDB = DataTransformasi::find()->select('umur,jenis_kelamin,ras,jenis_obat_1,jenis_obat_2,jenis_obat_3,jenis_obat_4,jenis_obat_5,jenis_obat_6,jenis_obat_7')->asArray()->all();
+$result = array_map('array_values', $dataDB);
+$T_result = transpose($result);
+
+$final=array();
+foreach($result as $key=>$rows){ 
+    $i=$key;
+    foreach($rows as $key=>$row){ 
+        $final[$i][$key]= (int) $result[$i][$key];
+    }
+} 
+
+
+$jumlah_cluster = 9;
 
 print("<p><pre><h4>Matrix  Data <h4> </pre> ");
-print("<p><pre> " . print_r($data, true) . "</pre> ");
+print("<p>Data Dummy <pre> " . print_r($data, true) . "</pre> "); 
+print("<p>Data DB <pre> " . print_r($final, true) . "</pre> ");
 // print("<p><pre> " . print_r(cekNilaiTerkecil($data[0]), true) . "</pre> ");
 
-(start($jumlah_cluster, $data));
+(start($jumlah_cluster, $final));
 
 
 
@@ -166,6 +181,8 @@ function hitungSum($data)
 {
     // di transpose agar mudah menjumlahkan nilai array column
     $T_data = transpose($data);
+    // print("<p>Data Error <pre> =>" . print_r($T_data, true) . "</pre></p> ");
+
     $hasil = array();
     foreach ($T_data as $key => $row) {
         $i = $key;
