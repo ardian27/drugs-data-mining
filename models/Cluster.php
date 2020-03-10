@@ -38,7 +38,7 @@ class Cluster extends \yii\db\ActiveRecord
     {
         return [
             'id_cluster' => 'Id Cluster',
-            'jumlah_cluster' => 'Jumlah Cluster',
+            'jumlah_cluster' => 'Jumlah K',
         ];
     }
 }

@@ -15,7 +15,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
 CrudAsset::register($this);
 
-?>
+?> 
+<div class="breadcrumb">
+
+        <h3>Data Preprosessing Berhasil Dilakukan</h1>
+        <p>4 Data kosong telah dihapus</p>
+      </div>
+
 <div class="data-preprosessing-index">
     <div id="ajaxCrudDatatable">
         <?=GridView::widget([

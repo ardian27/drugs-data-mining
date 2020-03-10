@@ -16,6 +16,12 @@ $this->params['breadcrumbs'][] = $this->title;
 CrudAsset::register($this);
 
 ?>
+<div class="breadcrumb">
+
+ <div class="hero-unit">
+        <h4>Proses transformasi data berhasil dilakukan</h4> 
+      </div>
+      </div>
 <div class="data-transformasi-index">
     <div id="ajaxCrudDatatable">
         <?=GridView::widget([
@@ -41,19 +47,7 @@ CrudAsset::register($this);
                 'type' => 'primary', 
                 'heading' => '<i class="glyphicon glyphicon-list"></i> Data Transformasi ',
                 'before'=>'<em></em>',
-                'after'=>BulkButtonWidget::widget([
-                            'buttons'=>Html::a('<i class="glyphicon glyphicon-trash"></i>&nbsp; Delete All',
-                                ["bulk-delete"] ,
-                                [
-                                    "class"=>"btn btn-danger btn-xs",
-                                    'role'=>'modal-remote-bulk',
-                                    'data-confirm'=>false, 'data-method'=>false,// for overide yii data api
-                                    'data-request-method'=>'post',
-                                    'data-confirm-title'=>'Are you sure?',
-                                    'data-confirm-message'=>'Are you sure want to delete this item'
-                                ]),
-                        ]).                        
-                        '<div class="clearfix"></div>',
+               
             ]
         ])?>
     </div>

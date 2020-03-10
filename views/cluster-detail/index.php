@@ -39,9 +39,7 @@ CrudAsset::register($this);
             'filterModel' => null,
             'pjax' => true,
             'columns' => require(__DIR__ . '/_columns.php'),
-            'toolbar' => [],
-            'striped' => true,
-            'condensed' => true,
+            'toolbar' => [], 
             'responsive' => true,
             'panel' => [
                 'type' => 'primary',

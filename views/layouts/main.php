@@ -51,8 +51,8 @@ AppAsset::register($this);
                 'label' => 'K-Means',
                 'items' => [
                     //  ['label' => 'Set Nilai K', 'url' => 'index.php?r=variable'],
-                     ['label' => 'Data Cluster', 'url' => 'index.php?r=cluster'],
                      ['label' => 'Clustering', 'url' => 'index.php?r=cluster/create'],
+                     ['label' => 'Data Cluster', 'url' => 'index.php?r=cluster'],
                 ],
             ],
             ['label' => 'About', 'url' => ['/site/contact']],

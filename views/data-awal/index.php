@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 CrudAsset::register($this);
 
 ?>
+
 <div class="data-awal-index">
     <div id="ajaxCrudDatatable">
         <?=GridView::widget([

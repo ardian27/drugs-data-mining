@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\models\DataAwal;
+
 use Yii;
 
 /**
@@ -43,5 +45,19 @@ class ClusterDetail extends \yii\db\ActiveRecord
             'id_data' => 'ID Data',
             'anggota_cluster' => 'Anggota Cluster',
         ];
+    }
+
+//     public function Balance($id)
+// {
+
+//     $data = DataSeleksi::findOne(['id_data'=>$id]);
+//     $hasil = 
+
+     
+//     return $hasil;
+// }
+    public function getAwal()
+    {
+        return $this->hasOne(DataAwal::className(), ['id_data' => 'id_data']);
     }
 }

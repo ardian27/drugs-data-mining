@@ -214,7 +214,7 @@ function hitungBagi($data, $hasilsum1)
     $sizeCluster = sizeOf($data);
     for ($i = 0; $i < $sizeCluster; $i++) {
         for ($j = 0; $j < sizeOf($data[0]); $j++) {
-            $hasil[$i][$j] = $data[$i][$j] / $hasilsum1[$i];
+            $hasil[$i][$j] = ($data[$i][$j] !=0) ? ($data[$i][$j] / $hasilsum1[$i]):0;
         }
     }
 

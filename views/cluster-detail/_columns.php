@@ -22,11 +22,80 @@ return [
         'vAlign' => 'middle',
         'hAlign' => 'center',
     ],
+
     [
         'class' => '\kartik\grid\DataColumn',
         'vAlign' => 'middle',
         'hAlign' => 'center',
         'attribute' => 'anggota_cluster',
+    ],
+    [
+        'class' => '\kartik\grid\DataColumn',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'attribute' => 'awal.umur',
+    ],
+
+    [
+        'class' => '\kartik\grid\DataColumn',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'attribute' => 'awal.jenis_kelamin',
+    ],
+    [
+        'class' => '\kartik\grid\DataColumn',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'attribute' => 'awal.ras',
+    ],
+
+    [
+        'class' => '\kartik\grid\DataColumn',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'attribute' => 'awal.jenis_obat_1',
+    ],
+
+    [
+        'class' => '\kartik\grid\DataColumn',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'attribute' => 'awal.jenis_obat_2',
+    ],
+
+    [
+        'class' => '\kartik\grid\DataColumn',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'attribute' => 'awal.jenis_obat_3',
+    ],
+
+    [
+        'class' => '\kartik\grid\DataColumn',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'attribute' => 'awal.jenis_obat_4',
+    ],
+
+    [
+        'class' => '\kartik\grid\DataColumn',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'attribute' => 'awal.jenis_obat_5',
+    ],
+
+    [
+        'class' => '\kartik\grid\DataColumn',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'attribute' => 'awal.jenis_obat_6',
+    ],
+
+    [
+        'class' => '\kartik\grid\DataColumn',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'attribute' => 'awal.jenis_obat_7',
     ],
     // [
     //     'class' => 'kartik\grid\ActionColumn',

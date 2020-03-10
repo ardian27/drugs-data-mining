@@ -30,6 +30,19 @@ $DataAwal = $this->render('//data-awal/index', [
 ]);
 
 
+// Data Selection
+$query = DataSeleksi::find();               
+$dataseleksi = new ActiveDataProvider([
+'query' => $query,
+'pagination' => [
+    'pageSize' => 50,
+],
+]);
+
+$DataSeleksi = $this->render('//data-seleksi/index', [
+    'dataProvider' => $dataseleksi,
+]);
+
 
 // Data Preprosessing
 $query = DataPreprosessing::find();               
@@ -43,19 +56,6 @@ $datapreprosessing = new ActiveDataProvider([
 
 $DataPreprosessing = $this->render('//data-preprosessing/index', [
     'dataProvider' => $datapreprosessing,
-]);
-
-// Data Selection
-$query = DataSeleksi::find();               
-$dataseleksi = new ActiveDataProvider([
-'query' => $query,
-'pagination' => [
-    'pageSize' => 50,
-],
-]);
-
-$DataSeleksi = $this->render('//data-seleksi/index', [
-    'dataProvider' => $dataseleksi,
 ]);
 
 
