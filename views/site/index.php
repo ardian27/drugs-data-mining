@@ -23,8 +23,8 @@ $dataDB = DataTransformasi::find()->select('umur,jenis_kelamin,ras,jenis_obat_1,
 $result = array_map('array_values', $dataDB);
 $samples = [[1, 1], [8, 7], [1, 2], [7, 8], [2, 1], [8, 9]];
 
+// $kmeans = new KMeans(5);
 $kmeans = new KMeans(5);
-// $kmeans = new KMeans(5,5);
 $r=$kmeans->cluster($result);
 
 // print("<p>Data Dummy <pre> " . print_r(sizeOf($r[0]), true) . "</pre> "); 
@@ -36,10 +36,17 @@ $r=$kmeans->cluster($result);
 // print("<p>Data Dummy <pre> " . print_r(sizeOf($r), true) . "</pre> "); 
 
 // print("<p>Data Dummy <pre> " . print_r($result, true) . "</pre> "); 
-print("<p>Data Dummy <pre> " . print_r($r, true) . "</pre> "); 
+// print("<p>Data Dummy <pre> " . print_r($r, true) . "</pre> "); 
+print("<p>Data Dummy <pre> c1=" . count($r[0]) . "</pre> "); 
+print("<p>Data Dummy <pre> c2=" . count($r[1]) . "</pre> "); 
+print("<p>Data Dummy <pre> c3=" . count($r[2]) . "</pre> "); 
+print("<p>Data Dummy <pre> c4=" . count($r[3]) . "</pre> "); 
+print("<p>Data Dummy <pre> c5=" . count($r[4]) . "</pre> "); 
 
 
-?>
+
+
+?> 
         <div class="jumbotron">
             <div class="col-lg-12 center">
             <img src="img/uin.jpg"height="100" width="100">
